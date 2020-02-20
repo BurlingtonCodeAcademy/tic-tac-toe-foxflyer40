@@ -35,8 +35,10 @@ describe("Tic Tac Toe", () => {
     })
 
     it('the status area should say whose turn it is', ()=>{
-      cy.get('.status').contains("Player X's turn")
+      cy.get('h3#turnIndicator').contains("Player One - PLAY!")
     })
   })
 
 })
+
+

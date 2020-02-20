@@ -27,6 +27,14 @@ let toggleTurnIndicator = () => {
       turnCounter += 1
 }
 
+let printXorO = () => {
+      if (turnCounter % 2 === 0) {
+            squareClicked = 'X'
+      } else {
+            squareClicked = 'O'
+      }
+}
+
 /********Game Play****************************** */
 
 // start game - disable start button - run turn toggle function
@@ -37,3 +45,92 @@ startUp.addEventListener('click', function () {
 
 
 // add event listeners for board squares
+c0.addEventListener('click', () => {
+      if (c0.textContent !== "") {
+            alert('Please select an empty cell.')
+      } else {
+            printXorO()
+            c0.textContent = squareClicked
+            toggleTurnIndicator()
+      }
+})
+
+c1.addEventListener('click', () => {
+      if (c1.textContent !== "") {
+            alert('Please select an empty cell.')
+      } else {
+            printXorO()
+            c1.textContent = squareClicked
+            toggleTurnIndicator()
+      }
+})
+
+c2.addEventListener('click', () => {
+      if (c2.textContent !== "") {
+            alert('Please select an empty cell.')
+      } else {
+            printXorO()
+            c2.textContent = squareClicked
+            toggleTurnIndicator()
+      }
+})
+
+c3.addEventListener('click', () => {
+      if (c3.textContent !== "") {
+            alert('Please select an empty cell.')
+      } else {
+            printXorO()
+            c3.textContent = squareClicked
+            toggleTurnIndicator()
+      }
+})
+
+c4.addEventListener('click', () => {
+      if (c4.textContent !== "") {
+            alert('Please select an empty cell.')
+      } else {
+            printXorO()
+            c4.textContent = squareClicked
+            toggleTurnIndicator()
+      }
+})
+
+c5.addEventListener('click', () => {
+      if (c5.textContent !== "") {
+            alert('Please select an empty cell.')
+      } else {
+            printXorO()
+            c5.textContent = squareClicked
+            toggleTurnIndicator()
+      }
+})
+
+c6.addEventListener('click', () => {
+      if (c6.textContent !== "") {
+            alert('Please select an empty cell.')
+      } else {
+            printXorO()
+            c6.textContent = squareClicked
+            toggleTurnIndicator()
+      }
+})
+
+c7.addEventListener('click', () => {
+      if (c7.textContent !== "") {
+            alert('Please select an empty cell.')
+      } else {
+            printXorO()
+            c7.textContent = squareClicked
+            toggleTurnIndicator()
+      }
+})
+
+c8.addEventListener('click', () => {
+      if (c8.textContent !== "") {
+            alert('Please select an empty cell.')
+      } else {
+            printXorO()
+            c8.textContent = squareClicked
+            toggleTurnIndicator()
+      }
+})

@@ -47,6 +47,8 @@ div[id^="row-"] {
   width: 608px;
   box-sizing: border-box;
   overflow: hidden;
+  font-size: 120px;
+  font-family: "Comic Sans MS"
 }
 
 div.board {

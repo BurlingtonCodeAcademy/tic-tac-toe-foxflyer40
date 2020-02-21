@@ -1,7 +1,8 @@
 /*****global Variables ****************************/
 let startUp = document.getElementById('start')         //fetch start button
 let playerUp = document.getElementById('turnIndicator') //fetch turn indicator text holder
-let boardSquare = document.getElementsByClassName('board')  //fetch board
+let instructionMessage = document.getElementById('instructions')  //fetch instruction line
+let boardOnOff = document.getElementsByClassName('board')  //fetch board
 let c0 = document.getElementById('cell-0')          //fetch board squares 
 let c1 = document.getElementById('cell-1')                  //
 let c2 = document.getElementById('cell-2')                  //
@@ -49,7 +50,7 @@ let printXorO = () => {
             squareClicked = 'O'
       };
 };
- 
+
 //Checks to see if there is a winner ---------------------------------------------------------------------------------------------------------------------
 let winCalc = () => {
       for (let winSet of Object.values(winConditions)) {
@@ -59,15 +60,15 @@ let winCalc = () => {
                   if (winSet[0].textContent === winSet[1].textContent && winSet[1].textContent === winSet[2].textContent) {
                         winSet[0].style.setProperty('color', 'red');
                         winSet[1].style.setProperty('color', 'red');
-                        winSet[2].style.setProperty('color', 'red'); 
+                        winSet[2].style.setProperty('color', 'red');
                         winSet[0].style.setProperty('background-color', 'yellow');
                         winSet[1].style.setProperty('background-color', 'yellow');
-                        winSet[2].style.setProperty('background-color', 'yellow'); 
+                        winSet[2].style.setProperty('background-color', 'yellow');
                         return true;
                   }
             }
       }
-} 
+}
 
 // Win condition satisfied
 let winner1or2 = () => {
@@ -76,16 +77,17 @@ let winner1or2 = () => {
       } else {
             playerUp.textContent = 'Player Two-(O) WINS!'
       };
-      process.exit()
-};
+      instructionMessage.textContent = "Refresh page for new game.";
+      };
 
 /********Game Play****************************** */
 
 // start game - disable start button - run turn toggle function
 startUp.addEventListener('click', function () {
-      startUp.setAttribute("disabled", "")
+      startUp.setAttribute("disabled", "");
+      instructionMessage.textContent = " Click in a square to place 'X' or 'O' "
       toggleTurnIndicator()
-}) 
+})
 
 
 // add event listeners for board squares

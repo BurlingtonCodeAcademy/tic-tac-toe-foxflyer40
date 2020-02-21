@@ -1,43 +1,77 @@
 /*****global Variables ****************************/
 let startUp = document.getElementById('start');         //fetch start button
-let playerUp = document.getElementById('turnIndicator') //fetch turn indicator text holder
-let boardSquare = document.getElementsByClassName('board')  //fetch board
-let c0 = document.getElementById('cell-0')          //fetch board squares 
-let c1 = document.getElementById('cell-1')
-let c2 = document.getElementById('cell-2')
-let c3 = document.getElementById('cell-3')
-let c4 = document.getElementById('cell-4')
-let c5 = document.getElementById('cell-5')
-let c6 = document.getElementById('cell-6')
-let c7 = document.getElementById('cell-7')
-let c8 = document.getElementById('cell-8')
+let playerUp = document.getElementById('turnIndicator'); //fetch turn indicator text holder
+let boardSquare = document.getElementsByClassName('board');  //fetch board
+let c0 = document.getElementById('cell-0');          //fetch board squares 
+let c1 = document.getElementById('cell-1');                  //
+let c2 = document.getElementById('cell-2');                  //
+let c3 = document.getElementById('cell-3');                  //
+let c4 = document.getElementById('cell-4');                  //
+let c5 = document.getElementById('cell-5');                  //
+let c6 = document.getElementById('cell-6');                  //
+let c7 = document.getElementById('cell-7');                  //
+let c8 = document.getElementById('cell-8');                  //
 
 
-let turnCounter = 1  //initialize turn counter
+let turnCounter = 1;  //initialize turn counter
+
+let winConditions = {
+      'topRow': ("c0", "c1", "c2"),
+      'midRow': ("c3", "c4", "c5"),
+      'lowRow': ("c6", "c7", "c8"),
+      'leftCol': ('c0', 'c3', "c6"),
+      'midCol': ('c1', 'c4', 'c7'),
+      'rightCol': ('c2', 'c5', 'c8'),
+      'lToRDiag': ('c0', 'c4', 'c8'),
+      'rToLDiag': ('c6', 'c4', 'c2')
+    };
 
 /****  functions **********************************/
 
 // check turnCounter =  if even number, player 2 turn / if odd number, player 1 turn
 let toggleTurnIndicator = () => {
-      winCalc()
+      winCalc();
       if (turnCounter % 2 === 0) {
             playerUp.textContent = 'Player Two - PLAY!'
       } else {
             playerUp.textContent = 'Player One - PLAY!'
-      }
-      turnCounter += 1
-}
+      };
+      turnCounter += 1;
+};
 
-// if player 1 print X - if player 2 pring O
+// if player 1 print X - if player 2 print O
 let printXorO = () => {
       if (turnCounter % 2 === 0) {
             squareClicked = 'X'
       } else {
             squareClicked = 'O'
-      }
-}
+      };
+};
 
 let winCalc = () => {
+      for (let winSet of Object.values(winConditions)) {
+if (winSet[0].textContent !== "") {
+      
+}
+      }
+      // function winCheck() {
+      //       //for every index in every element in the array created by winCombos keys
+      //       for (let combo of Object.values(winCombos)) {
+      //         //Does not set off alert when all cells are blank
+              if (combo[0].textContent !== '') {
+                //If they are all equal the same thing
+                if (combo[0].textContent === combo[1].textContent && combo[1].textContent === combo[2].textContent) {
+                  combo[0].style.setProperty('text-decoration', 'line-through');
+                  combo[1].style.setProperty('text-decoration', 'line-through');
+                  combo[2].style.setProperty('text-decoration', 'line-through');
+          
+                  return true;
+                }
+              }
+            }
+          }
+
+
       if ((c0.textContent === c1.textContent && c1.textContent === c2.textContent) ||
             (c0.textContent === c1.textContent && c1.textContent === c2.textContent) ||
             (c3.textContent === c4.textContent && c4.textContent === c5.textContent) ||

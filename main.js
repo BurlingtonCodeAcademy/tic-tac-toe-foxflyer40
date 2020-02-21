@@ -19,6 +19,7 @@ let turnCounter = 1  //initialize turn counter
 
 // check turnCounter =  if even number, player 2 turn / if odd number, player 1 turn
 let toggleTurnIndicator = () => {
+      winCalc()
       if (turnCounter % 2 === 0) {
             playerUp.textContent = 'Player Two - PLAY!'
       } else {
@@ -27,6 +28,7 @@ let toggleTurnIndicator = () => {
       turnCounter += 1
 }
 
+// if player 1 print X - if player 2 pring O
 let printXorO = () => {
       if (turnCounter % 2 === 0) {
             squareClicked = 'X'
@@ -34,6 +36,23 @@ let printXorO = () => {
             squareClicked = 'O'
       }
 }
+
+let winCalc = () => {
+      if ((c0.textContent === c1.textContent && c1.textContent === c2.textContent) ||
+            (c0.textContent === c1.textContent && c1.textContent === c2.textContent) ||
+            (c3.textContent === c4.textContent && c4.textContent === c5.textContent) ||
+            (c6.textContent === c7.textContent && c7.textContent === c8.textContent) ||
+            (c0.textContent === c3.textContent && c3.textContent === c6.textContent) ||
+            (c1.textContent === c4.textContent && c4.textContent === c7.textContent) ||
+            (c2.textContent === c5.textContent && c5.textContent === c8.textContent) ||
+            (c0.textContent === c4.textContent && c4.textContent === c8.textContent) ||
+            (c6.textContent === c4.textContent && c4.textContent === c2.textContent)) {
+            alert('Winner')
+      }
+}
+
+
+
 
 /********Game Play****************************** */
 

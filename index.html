@@ -12,7 +12,27 @@
 <body>
   <h2>Tic Tac Toe</h2>
   <h3 id="turnIndicator"> Get Ready To PLAY! </h3>
-  <p id="instructions"> Click start button to begin </p>
+  <p id="instructions"> Click start button to begin
+    <div class="gameType" id="gameType">
+      <input type="radio" id="pvp" name="game" value="pvp">
+      <label for="pvp">Player vs. Player</label>
+      <input type="radio" id="pvc" name="game" value="pvc">
+      <label for="pvc">Player vs Computer</label>
+      <button id="submit">Submit</button>
+    </div>
+    <div class="players" id="players">
+      <label for="playerx">Player "X" name:</label>
+      <input name="playerx" id="playerx" type="text" placeholder="enter name..."></input>
+      <label for="playero">Player "O" name:</label>
+      <input name="playero" id="playero" type="text" placeholder="enter name..."></input>
+      <button id="saveNames">Save Names</button>
+    </div>
+    <div class="players" id="player">
+      <label for="player1">Enter your name:</label>
+      <input name="player-1" id="Player1" type="text" placeholder="enter name..."></input>
+      <button id=Save>Save</button>
+    </div>
+  </p>
   <div class="board">
     <div id="row-1">
       <div id="cell-0"></div>

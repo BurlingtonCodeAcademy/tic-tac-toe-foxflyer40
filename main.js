@@ -1,8 +1,22 @@
+// const readline = require('readline');
+// const readlineInterface = readline.createInterface(process.stdin, process.stdout);
+
+// function ask(questionText) {
+//   return new Promise((resolve, reject) => {
+//     readlineInterface.question(questionText, resolve);
+//   });
+// };
+
 /*****global Variables ****************************/
 let startUp = document.getElementById('start')         //fetch start button
 let playerUp = document.getElementById('turnIndicator') //fetch turn indicator text holder
 let instructionMessage = document.getElementById('instructions')  //fetch instruction line
 let boardOnOff = document.getElementsByClassName('board')  //fetch board
+let playerNamesIn = document.getElementById('saveNames')
+let nameIn = document.getElementById('save')
+let typeOfGame = document.getElementById('submit')
+let xPlayer = (document.getElementById('playerx'))
+let oPlayer = (document.getElementById('playero'))
 let c0 = document.getElementById('cell-0')          //fetch board squares 
 let c1 = document.getElementById('cell-1')                  //
 let c2 = document.getElementById('cell-2')                  //
@@ -16,7 +30,7 @@ let c8 = document.getElementById('cell-8')                  //
 
 let turnCounter = 1;  //initialize turn counter
 
-let winConditions = {
+let winConditions = {                 // create win condition arrays
       'topRow': [c0, c1, c2],
       'midRow': [c3, c4, c5],
       'lowRow': [c6, c7, c8],
@@ -27,16 +41,62 @@ let winConditions = {
       'rToLDiag': [c6, c4, c2]
 }
 
+class Player {
+      constructor(name, turn, won, token) {
+            this.name = name
+            this.turn = turn
+            this.won = won
+            this.token = token
+      }
+}
+
+class BoardSquare {
+      constructor(owner, active) {
+            this.owner = owner
+            this.active = active
+      }
+}
+
+/****   Objects   *************************************************************** */
+const playerX = new Player("Player X", false, false, "X")
+const playerO = new Player("Player O", false, false, "O")
+
+const cell0 = new BoardSquare("", true)
+const cell1 = new BoardSquare("", true)
+const cell2 = new BoardSquare("", true)
+const cell3 = new BoardSquare("", true)
+const cell4 = new BoardSquare("", true)
+const cell5 = new BoardSquare("", true)
+const cell6 = new BoardSquare("", true)
+const cell7 = new BoardSquare("", true)
+const cell8 = new BoardSquare("", true)
+
 
 /****  functions **********************************/
+
+let reset = () => {
+      playerX.name = "Player X";
+      playerX.turn = false;
+      playerX.won = false;
+      playerO.name = "Player O";
+      playerO.turn = false;
+      playerO.won = false;
+      startUp.setAttribute("disabled", "");
+      document.getElementById("gameType").style.display = "none";
+      document.getElementById("players").style.display = "block";
+      document.getElementById("player").style.display = "none";
+      document.getElementById("turnIndicator").style.display = "none";
+      document.getElementById("instructions").style.display = "none";
+}
+
 
 // check turnCounter =  if even number, player 2 turn / if odd number, player 1 turn
 let toggleTurnIndicator = () => {
       winCalc();
       if (turnCounter % 2 === 0) {
-            playerUp.textContent = 'Player Two-(O) - PLAY!'
+            playerUp.textContent = playerO.name + ' - PLAY!'
       } else {
-            playerUp.textContent = 'Player One-(X) - PLAY!'
+            playerUp.textContent = playerX.name + ' - PLAY!'
       };
       turnCounter += 1;
 };
@@ -73,14 +133,27 @@ let winCalc = () => {
 // Win condition satisfied
 let winner1or2 = () => {
       if (turnCounter % 2 === 0) {
-            playerUp.textContent = 'Player One-(X) WINS!'
+            playerUp.textContent = playerX.name + ' WINS!'
       } else {
-            playerUp.textContent = 'Player Two-(O) WINS!'
+            playerUp.textContent = playerO.name + ' WINS!'
       };
       instructionMessage.textContent = "Refresh page for new game.";
-      };
+};
 
 /********Game Play****************************** */
+reset()
+playerNamesIn.addEventListener('click', function () {
+      playerX.name = xPlayer.value
+      playerO.name = oPlayer.value
+      document.getElementById("gameType").style.display = "none";
+      document.getElementById("players").style.display = "none";
+      document.getElementById("player").style.display = "none";
+      document.getElementById("turnIndicator").style.display = "block";
+      document.getElementById("instructions").style.display = "block";
+})
+
+
+
 
 // start game - disable start button - run turn toggle function
 startUp.addEventListener('click', function () {

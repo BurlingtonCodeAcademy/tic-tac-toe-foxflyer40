@@ -74,6 +74,30 @@ const cell8 = new BoardSquare("", true)
 
 /****  functions **********************************/
 
+let enableBoard = () => {
+      cell0.active = true
+      cell1.active = true
+      cell2.active = true
+      cell3.active = true
+      cell4.active = true
+      cell5.active = true
+      cell6.active = true
+      cell7.active = true
+      cell8.active = true
+}
+
+let disableBoard = () => {
+      cell0.active = false
+      cell1.active = false
+      cell2.active = false
+      cell3.active = false
+      cell4.active = false
+      cell5.active = false
+      cell6.active = false
+      cell7.active = false
+      cell8.active = false
+}
+
 let reset = () => {
       playerX.name = "Player X";
       playerX.turn = false;
@@ -89,7 +113,6 @@ let reset = () => {
       document.getElementById("instructions").style.display = "none";
 }
 
-
 // check turnCounter =  if even number, player 2 turn / if odd number, player 1 turn
 let toggleTurnIndicator = () => {
       winCalc();
@@ -100,7 +123,6 @@ let toggleTurnIndicator = () => {
       };
       turnCounter += 1;
 };
-
 
 // if player 1 print X - if player 2 print O
 let printXorO = () => {
@@ -132,6 +154,7 @@ let winCalc = () => {
 
 // Win condition satisfied
 let winner1or2 = () => {
+      disableBoard()
       if (turnCounter % 2 === 0) {
             playerUp.textContent = playerX.name + ' WINS!'
       } else {
@@ -142,6 +165,7 @@ let winner1or2 = () => {
 
 /********Game Play****************************** */
 reset()
+disableBoard()
 playerNamesIn.addEventListener('click', function () {
       playerX.name = xPlayer.value
       playerO.name = oPlayer.value
@@ -150,151 +174,167 @@ playerNamesIn.addEventListener('click', function () {
       document.getElementById("player").style.display = "none";
       document.getElementById("turnIndicator").style.display = "block";
       document.getElementById("instructions").style.display = "block";
+      startUp.removeAttribute("disabled", "")
 })
-
-
-
 
 // start game - disable start button - run turn toggle function
 startUp.addEventListener('click', function () {
       startUp.setAttribute("disabled", "");
+      enableBoard()
       instructionMessage.textContent = " Click in a square to place 'X' or 'O' "
       toggleTurnIndicator()
 })
 
-
 // add event listeners for board squares
 c0.addEventListener('click', () => {
-      if (c0.textContent !== "") {
-            alert('Please select an empty cell.')
-      } else {
-            printXorO()
-            c0.textContent = squareClicked
-            winCalc()
-            if (winCalc() === true) {
-                  winner1or2()
+      if (cell0.active === true) {
+            if (c0.textContent !== "") {
+                  alert('Please select an empty cell.')
             } else {
-                  toggleTurnIndicator()
+                  printXorO()
+                  c0.textContent = squareClicked
+                  winCalc()
+                  if (winCalc() === true) {
+                        winner1or2()
+                  } else {
+                        toggleTurnIndicator()
+                  }
             }
       }
 })
 
 c1.addEventListener('click', () => {
-      if (c1.textContent !== "") {
-            alert('Please select an empty cell.')
-      } else {
-            printXorO()
-            c1.textContent = squareClicked
-            winCalc()
-            if (winCalc() === true) {
-                  winner1or2()
+      if (cell1.active === true) {
+            if (c1.textContent !== "") {
+                  alert('Please select an empty cell.')
             } else {
-                  toggleTurnIndicator()
+                  printXorO()
+                  c1.textContent = squareClicked
+                  winCalc()
+                  if (winCalc() === true) {
+                        winner1or2()
+                  } else {
+                        toggleTurnIndicator()
+                  }
             }
       }
 })
 
 c2.addEventListener('click', () => {
-      if (c2.textContent !== "") {
-            alert('Please select an empty cell.')
-      } else {
-            printXorO()
-            c2.textContent = squareClicked
-            winCalc()
-            if (winCalc() === true) {
-                  winner1or2()
+      if (cell2.active === true) {
+            if (c2.textContent !== "") {
+                  alert('Please select an empty cell.')
             } else {
-                  toggleTurnIndicator()
+                  printXorO()
+                  c2.textContent = squareClicked
+                  winCalc()
+                  if (winCalc() === true) {
+                        winner1or2()
+                  } else {
+                        toggleTurnIndicator()
+                  }
             }
       }
 })
 
 c3.addEventListener('click', () => {
-      if (c3.textContent !== "") {
-            alert('Please select an empty cell.')
-      } else {
-            printXorO()
-            c3.textContent = squareClicked
-            winCalc()
-            if (winCalc() === true) {
-                  winner1or2()
+      if (cell3.active === true) {
+            if (c3.textContent !== "") {
+                  alert('Please select an empty cell.')
             } else {
-                  toggleTurnIndicator()
+                  printXorO()
+                  c3.textContent = squareClicked
+                  winCalc()
+                  if (winCalc() === true) {
+                        winner1or2()
+                  } else {
+                        toggleTurnIndicator()
+                  }
             }
       }
 })
 
 c4.addEventListener('click', () => {
-      if (c4.textContent !== "") {
-            alert('Please select an empty cell.')
-      } else {
-            printXorO()
-            c4.textContent = squareClicked
-            winCalc()
-            if (winCalc() === true) {
-                  winner1or2()
+      if (cell4.active === true) {
+            if (c4.textContent !== "") {
+                  alert('Please select an empty cell.')
             } else {
-                  toggleTurnIndicator()
+                  printXorO()
+                  c4.textContent = squareClicked
+                  winCalc()
+                  if (winCalc() === true) {
+                        winner1or2()
+                  } else {
+                        toggleTurnIndicator()
+                  }
             }
       }
 })
 
 c5.addEventListener('click', () => {
-      if (c5.textContent !== "") {
-            alert('Please select an empty cell.')
-      } else {
-            printXorO()
-            c5.textContent = squareClicked
-            winCalc()
-            if (winCalc() === true) {
-                  winner1or2()
+      if (cell5.active === true) {
+            if (c5.textContent !== "") {
+                  alert('Please select an empty cell.')
             } else {
-                  toggleTurnIndicator()
+                  printXorO()
+                  c5.textContent = squareClicked
+                  winCalc()
+                  if (winCalc() === true) {
+                        winner1or2()
+                  } else {
+                        toggleTurnIndicator()
+                  }
             }
       }
 })
 
 c6.addEventListener('click', () => {
-      if (c6.textContent !== "") {
-            alert('Please select an empty cell.')
-      } else {
-            printXorO()
-            c6.textContent = squareClicked
-            winCalc()
-            if (winCalc() === true) {
-                  winner1or2()
+      if (cell6.active === true) {
+            if (c6.textContent !== "") {
+                  alert('Please select an empty cell.')
             } else {
-                  toggleTurnIndicator()
+                  printXorO()
+                  c6.textContent = squareClicked
+                  winCalc()
+                  if (winCalc() === true) {
+                        winner1or2()
+                  } else {
+                        toggleTurnIndicator()
+                  }
             }
       }
 })
 
 c7.addEventListener('click', () => {
-      if (c7.textContent !== "") {
-            alert('Please select an empty cell.')
-      } else {
-            printXorO()
-            c7.textContent = squareClicked
-            winCalc()
-            if (winCalc() === true) {
-                  winner1or2()
+      if (cell7.active === true) {
+            if (c7.textContent !== "") {
+                  alert('Please select an empty cell.')
             } else {
-                  toggleTurnIndicator()
+                  printXorO()
+                  c7.textContent = squareClicked
+                  winCalc()
+                  if (winCalc() === true) {
+                        winner1or2()
+                  } else {
+                        toggleTurnIndicator()
+                  }
             }
       }
 })
 
 c8.addEventListener('click', () => {
-      if (c8.textContent !== "") {
-            alert('Please select an empty cell.')
-      } else {
-            printXorO()
-            c8.textContent = squareClicked
-            winCalc()
-            if (winCalc() === true) {
-                  winner1or2()
+      if (cell8.active === true) {
+            if (c8.textContent !== "") {
+                  alert('Please select an empty cell.')
             } else {
-                  toggleTurnIndicator()
+                  printXorO()
+                  c8.textContent = squareClicked
+                  winCalc()
+                  if (winCalc() === true) {
+                        winner1or2()
+                  } else {
+                        toggleTurnIndicator()
+                  }
             }
       }
 })

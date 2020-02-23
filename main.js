@@ -8,24 +8,25 @@
 // };
 
 /*****global Variables ****************************/
-let startUp = document.getElementById('start')         //fetch start button
-let playerUp = document.getElementById('turnIndicator') //fetch turn indicator text holder
-let instructionMessage = document.getElementById('instructions')  //fetch instruction line
-let boardOnOff = document.getElementsByClassName('board')  //fetch board
+let startUp = document.getElementById('start')         
+let playerUp = document.getElementById('turnIndicator') 
+let instructionMessage = document.getElementById('instructions') 
+let boardOnOff = document.getElementsByClassName('board')
 let playerNamesIn = document.getElementById('saveNames')
 let nameIn = document.getElementById('save')
-let typeOfGame = document.getElementById('submit')
+let playerVsPlayer = document.getElementById('pvp')
+let playerVsComputer = document.getElementById('pvc')
 let xPlayer = (document.getElementById('playerx'))
 let oPlayer = (document.getElementById('playero'))
-let c0 = document.getElementById('cell-0')          //fetch board squares 
-let c1 = document.getElementById('cell-1')                  //
-let c2 = document.getElementById('cell-2')                  //
-let c3 = document.getElementById('cell-3')                  //
-let c4 = document.getElementById('cell-4')                  //
-let c5 = document.getElementById('cell-5')                  //
-let c6 = document.getElementById('cell-6')                  //
-let c7 = document.getElementById('cell-7')                  //
-let c8 = document.getElementById('cell-8')                  //
+let c0 = document.getElementById('cell-0') 
+let c1 = document.getElementById('cell-1')
+let c2 = document.getElementById('cell-2')
+let c3 = document.getElementById('cell-3')
+let c4 = document.getElementById('cell-4')
+let c5 = document.getElementById('cell-5')
+let c6 = document.getElementById('cell-6')
+let c7 = document.getElementById('cell-7')
+let c8 = document.getElementById('cell-8')
 
 
 let turnCounter = 1;  //initialize turn counter
@@ -106,11 +107,12 @@ let reset = () => {
       playerO.turn = false;
       playerO.won = false;
       startUp.setAttribute("disabled", "");
-      document.getElementById("gameType").style.display = "none";
-      document.getElementById("players").style.display = "block";
+      document.getElementById("gameType").style.display = "block";
+      document.getElementById("players").style.display = "none";
       document.getElementById("player").style.display = "none";
       document.getElementById("turnIndicator").style.display = "none";
-      document.getElementById("instructions").style.display = "none";
+      document.getElementById("instructions").style.display = "block";
+      instructionMessage.textContent = "Select your Game Type"
 }
 
 // check turnCounter =  if even number, player 2 turn / if odd number, player 1 turn
@@ -122,6 +124,7 @@ let toggleTurnIndicator = () => {
             playerUp.textContent = playerX.name + ' - PLAY!'
       };
       turnCounter += 1;
+      console.log(turnCounter)
 };
 
 // if player 1 print X - if player 2 print O
@@ -166,23 +169,43 @@ let winner1or2 = () => {
 /********Game Play****************************** */
 reset()
 disableBoard()
+
+playerVsPlayer.addEventListener('click', function () {
+      document.getElementById("gameType").style.display = "none";
+      document.getElementById("players").style.display = "block";
+      document.getElementById("player").style.display = "none";
+      document.getElementById("turnIndicator").style.display = "none";
+      document.getElementById("instructions").style.display = "block";
+      instructionMessage.textContent = "Enter player names then click Save Names"
+})
+
 playerNamesIn.addEventListener('click', function () {
-      playerX.name = xPlayer.value
-      playerO.name = oPlayer.value
+      if (xPlayer.value === "") {
+            playerX.name = "Player X";
+      } else {
+            playerX.name = xPlayer.value
+      };
+      if (oPlayer.value === "") {
+            playerO.name = "Player O"
+      } else {
+            playerO.name = oPlayer.value
+      }
       document.getElementById("gameType").style.display = "none";
       document.getElementById("players").style.display = "none";
       document.getElementById("player").style.display = "none";
       document.getElementById("turnIndicator").style.display = "block";
       document.getElementById("instructions").style.display = "block";
+      instructionMessage.textContent = "Click start button to begin"
       startUp.removeAttribute("disabled", "")
 })
 
 // start game - disable start button - run turn toggle function
 startUp.addEventListener('click', function () {
       startUp.setAttribute("disabled", "");
-      enableBoard()
-      instructionMessage.textContent = " Click in a square to place 'X' or 'O' "
-      toggleTurnIndicator()
+      enableBoard();
+      instructionMessage.textContent = " Click in a square to place 'X' or 'O' ";
+      toggleTurnIndicator();
+     
 })
 
 // add event listeners for board squares

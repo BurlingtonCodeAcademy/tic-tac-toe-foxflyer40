@@ -112,7 +112,8 @@ let reset = () => {
       document.getElementById("player").style.display = "none";
       document.getElementById("turnIndicator").style.display = "none";
       document.getElementById("instructions").style.display = "block";
-      instructionMessage.textContent = "Select your Game Type"
+      instructionMessage.textContent = "Select your Game Type";
+      disableBoard()
 }
 
 // check turnCounter =  if even number, player 2 turn / if odd number, player 1 turn
@@ -166,9 +167,18 @@ let winner1or2 = () => {
       instructionMessage.textContent = "Refresh page for new game.";
 };
 
+
+let startTimer = setInterval(myTimer, 1000);
+
+function myTimer() {
+      elapsedTime += 1
+    document.getElementById('seconds').innerHTML=elapsedTime
+}
+
+
 /********Game Play****************************** */
 reset()
-disableBoard()
+
 
 playerVsPlayer.addEventListener('click', function () {
       document.getElementById("gameType").style.display = "none";
@@ -205,6 +215,8 @@ startUp.addEventListener('click', function () {
       enableBoard();
       instructionMessage.textContent = " Click in a square to place 'X' or 'O' ";
       toggleTurnIndicator();
+      elapsedTime = 0
+      startTimer()
      
 })
 

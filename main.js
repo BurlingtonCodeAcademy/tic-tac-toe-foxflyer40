@@ -18,8 +18,7 @@ let c5 = document.getElementById('cell-5')
 let c6 = document.getElementById('cell-6')
 let c7 = document.getElementById('cell-7')
 let c8 = document.getElementById('cell-8')
-let elapsedTime = 0
-
+let elapsedTime = document.getElementById('seconds')
 let turnCounter = 1 //initialize turn counter
 
 let winConditions = {
@@ -65,19 +64,34 @@ const cell7 = new BoardSquare('', true)
 const cell8 = new BoardSquare('', true)
 
 /****  functions **********************************/
+//startTimer =
+ function myTimer() {
+  elapsedTime += 1;
+  document.getElementById('seconds').innerHTML = elapsedTime;
+ }
 
-let dl5500 = () => {
-      //create new array from 
-     // create new array from scan of cell objects above
-     //use random num generator to select from array new var =compSquare
-     // 
-     compSquare.textContent = "O"
-      winCalc()
-      if (winCalc() === true) {
-        winner1or2()
-      } else {
-        toggleTurnIndicator()
+
+ let gameTime = () => {
+   setInterval(myTimer, 1000);
+ }
+
+// stop timer
+let stopTimer = () => {
+  clearInterval(gameTime);
 }
+
+// let dl5500 = () => {
+//       //create new array from
+//      // create new array from scan of cell objects above
+//      //use random num generator to select from array new var =compSquare
+//      //
+//      compSquare.textContent = "O"
+//       winCalc()
+//       if (winCalc() === true) {
+//         winner1or2()
+//       } else {
+//         toggleTurnIndicator()
+// }
 
 let enableBoard = () => {
   cell0.active = true
@@ -116,6 +130,7 @@ let reset = () => {
   document.getElementById('player').style.display = 'none'
   document.getElementById('turnIndicator').style.display = 'none'
   document.getElementById('instructions').style.display = 'block'
+  document.getElementById('timer').style.display = 'none'
   instructionMessage.textContent = 'Select your Game Type'
   disableBoard()
   elapsedTime = 0
@@ -162,6 +177,7 @@ let winCalc = () => {
         winSet[0].style.setProperty('background-color', 'yellow')
         winSet[1].style.setProperty('background-color', 'yellow')
         winSet[2].style.setProperty('background-color', 'yellow')
+        
         return true
       }
     }
@@ -170,21 +186,21 @@ let winCalc = () => {
 
 // Win condition satisfied
 let winner1or2 = () => {
-  disableBoard()
+    disableBoard()
   if (turnCounter % 2 === 0) {
-    playerUp.textContent = playerX.name + ' WINS!'
+    playerUp.textContent = playerX.name + ' WON!'
+    
   } else {
     playerUp.textContent = playerO.name + ' WINS!'
+    
   }
-  instructionMessage.textContent = 'Refresh page for new game.'
+  instructionMessage.textContent = 'This game lasted ' + elapsedTime + ' seconds. Refresh page for new game.'
+  document.getElementById('timer').style.display = 'none'
 }
 
-//let startTimer =
 
-function myTimer() {
-  elapsedTime += 1
-  document.getElementById('seconds').innerHTML = elapsedTime
-}
+
+
 
 /********Game Play****************************** */
 reset()
@@ -245,11 +261,13 @@ nameIn.addEventListener('click', function() {
 
 // start game - disable start button - run turn toggle function
 startUp.addEventListener('click', function() {
-  startUp.setAttribute('disabled', '')
+    startUp.setAttribute('disabled', '')
   enableBoard()
+  document.getElementById('timer').style.display = 'block'
   instructionMessage.textContent = " Click in a square to place 'X' or 'O' "
+  gameTime()
   toggleTurnIndicator()
-  setInterval(myTimer, 1000)
+
 })
 
 // add event listeners for board squares
@@ -262,6 +280,7 @@ c0.addEventListener('click', () => {
       c0.textContent = squareClicked
       winCalc()
       if (winCalc() === true) {
+        
         winner1or2()
       } else {
         toggleTurnIndicator()
@@ -279,6 +298,7 @@ c1.addEventListener('click', () => {
       c1.textContent = squareClicked
       winCalc()
       if (winCalc() === true) {
+    
         winner1or2()
       } else {
         toggleTurnIndicator()
@@ -296,6 +316,7 @@ c2.addEventListener('click', () => {
       c2.textContent = squareClicked
       winCalc()
       if (winCalc() === true) {
+
         winner1or2()
       } else {
         toggleTurnIndicator()
@@ -313,6 +334,7 @@ c3.addEventListener('click', () => {
       c3.textContent = squareClicked
       winCalc()
       if (winCalc() === true) {
+        
         winner1or2()
       } else {
         toggleTurnIndicator()
@@ -330,6 +352,7 @@ c4.addEventListener('click', () => {
       c4.textContent = squareClicked
       winCalc()
       if (winCalc() === true) {
+       
         winner1or2()
       } else {
         toggleTurnIndicator()
@@ -347,6 +370,7 @@ c5.addEventListener('click', () => {
       c5.textContent = squareClicked
       winCalc()
       if (winCalc() === true) {
+        
         winner1or2()
       } else {
         toggleTurnIndicator()
@@ -364,6 +388,7 @@ c6.addEventListener('click', () => {
       c6.textContent = squareClicked
       winCalc()
       if (winCalc() === true) {
+       
         winner1or2()
       } else {
         toggleTurnIndicator()
@@ -381,6 +406,7 @@ c7.addEventListener('click', () => {
       c7.textContent = squareClicked
       winCalc()
       if (winCalc() === true) {
+       
         winner1or2()
       } else {
         toggleTurnIndicator()
@@ -398,6 +424,7 @@ c8.addEventListener('click', () => {
       c8.textContent = squareClicked
       winCalc()
       if (winCalc() === true) {
+        
         winner1or2()
       } else {
         toggleTurnIndicator()

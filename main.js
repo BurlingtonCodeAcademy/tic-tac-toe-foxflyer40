@@ -1,14 +1,13 @@
 /*****global Variables ****************************/
-let startUp = document.getElementById('start')
-let playerUp = document.getElementById('turnIndicator')
-let instructionMessage = document.getElementById('instructions')
-let boardOnOff = document.getElementsByClassName('board')
-let playerNamesIn = document.getElementById('saveNames')
-let nameIn = document.getElementById('save')
-let playerVsPlayer = document.getElementById('pvp')
-let playerVsComputer = document.getElementById('pvc')
-let xPlayer = document.getElementById('playerx')
-let oPlayer = document.getElementById('playero')
+let startUp = document.getElementById('start')//Start Button
+let playerUp = document.getElementById('turnIndicator')//Play Display
+let instructionMessage = document.getElementById('instructions')//Instruction Line
+let playerNamesIn = document.getElementById('saveNames')//enter 2 names button
+let nameIn = document.getElementById('save')//enter 1 name button
+let playerVsPlayer = document.getElementById('pvp')// game type chooser button
+let playerVsComputer = document.getElementById('pvc')// game type chooser button
+let xPlayer = document.getElementById('playerx')// player x name input
+let oPlayer = document.getElementById('playero')// player o name input
 let c0 = document.getElementById('cell-0')
 let c1 = document.getElementById('cell-1')
 let c2 = document.getElementById('cell-2')
@@ -18,11 +17,10 @@ let c5 = document.getElementById('cell-5')
 let c6 = document.getElementById('cell-6')
 let c7 = document.getElementById('cell-7')
 let c8 = document.getElementById('cell-8')
-let elapsedTime = document.getElementById('seconds')
-let turnCounter = 1 //initialize turn counter
+let elapsedTime = document.getElementById('seconds')//Timer display number
+let turnCounter = 1 // keep track of # of turns
 
-let winConditions = {
-  // create win condition arrays
+let winConditions = {   // create win condition arrays  
   topRow: [c0, c1, c2],
   midRow: [c3, c4, c5],
   lowRow: [c6, c7, c8],
@@ -33,19 +31,20 @@ let winConditions = {
   rToLDiag: [c6, c4, c2],
 }
 
-class Player {
+class Player {  // create player class objects
   constructor(name, turn, won, token) {
-    this.name = name
-    this.turn = turn
-    this.won = won
-    this.token = token
+    this.name = name  //what is your name
+    this.turn = turn  //is it your turn t/f
+    this.won = won  // did you win -- NOT USED
+    this.token = token  // what do you mark your square with
   }
 }
 
-class BoardSquare {
+class BoardSquare {  // create boardsquare class objects
   constructor(owner, active) {
-    this.owner = owner
-    this.active = active
+    this.location = location  // global variable that maps to board element
+    this.owner = owner  // whose token is in the square  = to board Element .textContent
+    this.active = active  // clickable or not
   }
 }
 
@@ -53,46 +52,38 @@ class BoardSquare {
 const playerX = new Player('Player X', false, false, 'X')
 const playerO = new Player('Player O', false, false, 'O')
 
-const cell0 = new BoardSquare('', true)
-const cell1 = new BoardSquare('', true)
-const cell2 = new BoardSquare('', true)
-const cell3 = new BoardSquare('', true)
-const cell4 = new BoardSquare('', true)
-const cell5 = new BoardSquare('', true)
-const cell6 = new BoardSquare('', true)
-const cell7 = new BoardSquare('', true)
-const cell8 = new BoardSquare('', true)
+const cell0 = new BoardSquare(c0, '', true)
+const cell1 = new BoardSquare(c1, '', true)
+const cell2 = new BoardSquare(c2, '', true)
+const cell3 = new BoardSquare(c3, '', true)
+const cell4 = new BoardSquare(c4, '', true)
+const cell5 = new BoardSquare(c5, '', true)
+const cell6 = new BoardSquare(c6, '', true)
+const cell7 = new BoardSquare(c7, '', true)
+const cell8 = new BoardSquare(c8, '', true)
 
-/****  functions **********************************/
+/****  functions **********************************************************************/
+// random number generator
+function randomCell(max, min) {
+  return Math.floor(min + Math.random() * (max - min + 1))
+}
+
 //startTimer =
- function myTimer() {
-  elapsedTime += 1;
-  document.getElementById('seconds').innerHTML = elapsedTime;
- }
+function myTimer() {
+  elapsedTime += 1
+  document.getElementById('seconds').innerHTML = elapsedTime
+}
 
-
- let gameTime = () => {
-   setInterval(myTimer, 1000);
- }
+let gameTime = () => {
+  setInterval(myTimer, 1000)
+}
 
 // stop timer
 let stopTimer = () => {
-  clearInterval(gameTime);
+  clearInterval(gameTime)
 }
 
-// let dl5500 = () => {
-//       //create new array from
-//      // create new array from scan of cell objects above
-//      //use random num generator to select from array new var =compSquare
-//      //
-//      compSquare.textContent = "O"
-//       winCalc()
-//       if (winCalc() === true) {
-//         winner1or2()
-//       } else {
-//         toggleTurnIndicator()
-// }
-
+//enable board - could be a single variable, do not need individual on-of switches
 let enableBoard = () => {
   cell0.active = true
   cell1.active = true
@@ -105,6 +96,7 @@ let enableBoard = () => {
   cell8.active = true
 }
 
+//disable board - could be a single variable, do not need individual on-of switches
 let disableBoard = () => {
   cell0.active = false
   cell1.active = false
@@ -117,51 +109,81 @@ let disableBoard = () => {
   cell8.active = false
 }
 
-let reset = () => {
+    // Computer now decides it's move - UNSUCCESSFUL
+//let dl5500 = () => {   
+  // computer decides which squares are available to put something in
+       // iterate over my boardSquare objects, find objejts whose owner = ""
+       // build array from these
+  
+  // copmuter now generates a random number
+  // uses this number to pick the nth item in the array
+  //let cellPicker = randomCell('# of items in the array', 0)
+  //computer now places O token in the selected cell
+    
+  
+  // cellPicked = 'cell' + cellPicker
+  // cell0.owner = 'O'
+  // c0.textContent = playerO.token
+
+  // for (let cCell of Object.values(cellsSelectable)) {
+  // if (cCell[0] === "") {
+  //   return cCell[1]
+  // }
+  // }
+
+  //      these items below complete the 'turn' of the computer
+
+  //       winCalc()
+  //       if (winCalc() === true) {
+  //         winner1or2()
+  //       } else {
+  //         turnCounter += 1
+
+
+let reset = () => {  // Intialized game conditions
   playerX.name = 'Player X'
   playerX.turn = false
-  playerX.won = false
   playerO.name = 'Player O'
   playerO.turn = false
-  playerO.won = false
-  startUp.setAttribute('disabled', '')
-  document.getElementById('gameType').style.display = 'block'
-  document.getElementById('players').style.display = 'none'
-  document.getElementById('player').style.display = 'none'
-  document.getElementById('turnIndicator').style.display = 'none'
-  document.getElementById('instructions').style.display = 'block'
-  document.getElementById('timer').style.display = 'none'
-  instructionMessage.textContent = 'Select your Game Type'
-  disableBoard()
-  elapsedTime = 0
+  startUp.setAttribute('disabled', '')// start button not clickable
+  document.getElementById('gameType').style.display = 'block'//show game type choosers
+  document.getElementById('players').style.display = 'none'//hide enter 2 names
+  document.getElementById('player').style.display = 'none'// hide enter 1 name
+  document.getElementById('turnIndicator').style.display = 'none'// hide play display
+  document.getElementById('instructions').style.display = 'block'//show instruction line
+  document.getElementById('timer').style.display = 'none'// hide timer display
+  instructionMessage.textContent = 'Select your Game Type' //instructions at start up
+  disableBoard() // board is not clickable
+  elapsedTime = 0 //initialize timer
 }
 
-// check turnCounter =  if even number, player 2 turn / if odd number, player 1 turn
+// switch player turns after evaluationg if winning condition exists
+// if last turn and no win condition initiate DRAW display
 let toggleTurnIndicator = () => {
   winCalc()
-  if (turnCounter % 2 === 0 && playerO.name === 'Dell Latitude 5500') {
-    dl5500()
-  } else {
-    playerUp.textContent = playerO.name + ' - PLAY!'
-  }
-  if (turnCounter % 2 !== 0) {
+  if (playerO.turn === true && playerO.name !== 'Dell Latitude 5500') {
     playerUp.textContent = playerX.name + ' - PLAY!'
+    playerO.turn = false
+    playerX.turn = true
+  } else if (playerX.turn === true) {
+    playerUp.textContent = playerO.name + ' - PLAY!'
+    playerX.turn = false
+    playerO.turn = true
+  }
+  if (playerO.name === 'Dell Latitude 5500') {
+    console.log("Computer now decides it's move")
   }
   turnCounter += 1
-  // if turnCounter is = to all squares full then run Draw message
-  console.log(turnCounter) //process check
-}
-
-// if player 1 print X - if player 2 print O
-let printXorO = () => {
-  if (turnCounter % 2 === 0) {
-    squareClicked = 'X'
-  } else {
-    squareClicked = 'O'
+  if (turnCounter === 10) {
+    disableBoard()
+    playerUp.textContent = 'This game is a DRAW!'
+    instructionMessage.textContent =
+      'This game lasted ' + elapsedTime + ' seconds. Refresh page for new game.'
+    document.getElementById('timer').style.display = 'none'
   }
 }
 
-//Checks to see if there is a winner ---------------------------------------------------------------------------------------------------------------------
+//Checks to see if there is a winner 
 let winCalc = () => {
   for (let winSet of Object.values(winConditions)) {
     //filter out data sets that include an empty value = a winning set is all values filled
@@ -170,14 +192,13 @@ let winCalc = () => {
       if (
         winSet[0].textContent === winSet[1].textContent &&
         winSet[1].textContent === winSet[2].textContent
-      ) {
+      ) {  //set win condition game display
         winSet[0].style.setProperty('color', 'red')
         winSet[1].style.setProperty('color', 'red')
         winSet[2].style.setProperty('color', 'red')
         winSet[0].style.setProperty('background-color', 'yellow')
         winSet[1].style.setProperty('background-color', 'yellow')
         winSet[2].style.setProperty('background-color', 'yellow')
-        
         return true
       }
     }
@@ -186,23 +207,18 @@ let winCalc = () => {
 
 // Win condition satisfied
 let winner1or2 = () => {
-    disableBoard()
-  if (turnCounter % 2 === 0) {
+  disableBoard()
+  if (playerX.turn === true) {
     playerUp.textContent = playerX.name + ' WON!'
-    
   } else {
     playerUp.textContent = playerO.name + ' WINS!'
-    
   }
-  instructionMessage.textContent = 'This game lasted ' + elapsedTime + ' seconds. Refresh page for new game.'
+  instructionMessage.textContent =
+    'This game lasted ' + elapsedTime + ' seconds. Refresh page for new game.'
   document.getElementById('timer').style.display = 'none'
 }
 
-
-
-
-
-/********Game Play****************************** */
+//  Game Play set up inputs********************************************************
 reset()
 
 playerVsComputer.addEventListener('click', function() {
@@ -259,16 +275,18 @@ nameIn.addEventListener('click', function() {
   startUp.removeAttribute('disabled', '')
 })
 
-// start game - disable start button - run turn toggle function
+//     Game play - game live and proceeds by responding to click inputs
+
+// start game - disable start button 
 startUp.addEventListener('click', function() {
-    startUp.setAttribute('disabled', '')
+  startUp.setAttribute('disabled', '')
   enableBoard()
   document.getElementById('timer').style.display = 'block'
   instructionMessage.textContent = " Click in a square to place 'X' or 'O' "
   gameTime()
-  toggleTurnIndicator()
-
-})
+  playerX.turn = true
+  playerUp.textContent = playerX.name + ' - PLAY!'
+ })
 
 // add event listeners for board squares
 c0.addEventListener('click', () => {
@@ -276,11 +294,15 @@ c0.addEventListener('click', () => {
     if (c0.textContent !== '') {
       alert('Please select an empty cell.')
     } else {
-      printXorO()
-      c0.textContent = squareClicked
+      if (playerX.turn === true) {
+        cell0.owner = 'X'
+        c0.textContent = playerX.token
+      } else {
+        cell0.owner = 'O'
+        c0.textContent = playerO.token
+      }
       winCalc()
       if (winCalc() === true) {
-        
         winner1or2()
       } else {
         toggleTurnIndicator()
@@ -294,11 +316,15 @@ c1.addEventListener('click', () => {
     if (c1.textContent !== '') {
       alert('Please select an empty cell.')
     } else {
-      printXorO()
-      c1.textContent = squareClicked
+      if (playerX.turn === true) {
+        cell1.owner = 'X'
+        c1.textContent = playerX.token
+      } else {
+        cell1.owner = 'O'
+        c1.textContent = playerO.token
+      }
       winCalc()
       if (winCalc() === true) {
-    
         winner1or2()
       } else {
         toggleTurnIndicator()
@@ -312,11 +338,15 @@ c2.addEventListener('click', () => {
     if (c2.textContent !== '') {
       alert('Please select an empty cell.')
     } else {
-      printXorO()
-      c2.textContent = squareClicked
+      if (playerX.turn === true) {
+        cell2.owner = 'X'
+        c2.textContent = playerX.token
+      } else {
+        cell2.owner = 'O'
+        c2.textContent = playerO.token
+      }
       winCalc()
       if (winCalc() === true) {
-
         winner1or2()
       } else {
         toggleTurnIndicator()
@@ -330,11 +360,15 @@ c3.addEventListener('click', () => {
     if (c3.textContent !== '') {
       alert('Please select an empty cell.')
     } else {
-      printXorO()
-      c3.textContent = squareClicked
+      if (playerX.turn === true) {
+        cell3.owner = 'X'
+        c3.textContent = playerX.token
+      } else {
+        cell3.owner = 'O'
+        c3.textContent = playerO.token
+      }
       winCalc()
       if (winCalc() === true) {
-        
         winner1or2()
       } else {
         toggleTurnIndicator()
@@ -348,11 +382,15 @@ c4.addEventListener('click', () => {
     if (c4.textContent !== '') {
       alert('Please select an empty cell.')
     } else {
-      printXorO()
-      c4.textContent = squareClicked
+      if (playerX.turn === true) {
+        cell4.owner = 'X'
+        c4.textContent = playerX.token
+      } else {
+        cell4.owner = 'O'
+        c4.textContent = playerO.token
+      }
       winCalc()
       if (winCalc() === true) {
-       
         winner1or2()
       } else {
         toggleTurnIndicator()
@@ -366,11 +404,15 @@ c5.addEventListener('click', () => {
     if (c5.textContent !== '') {
       alert('Please select an empty cell.')
     } else {
-      printXorO()
-      c5.textContent = squareClicked
+      if (playerX.turn === true) {
+        cell5.owner = 'X'
+        c5.textContent = playerX.token
+      } else {
+        cell5.owner = 'O'
+        c5.textContent = playerO.token
+      }
       winCalc()
       if (winCalc() === true) {
-        
         winner1or2()
       } else {
         toggleTurnIndicator()
@@ -384,11 +426,15 @@ c6.addEventListener('click', () => {
     if (c6.textContent !== '') {
       alert('Please select an empty cell.')
     } else {
-      printXorO()
-      c6.textContent = squareClicked
+      if (playerX.turn === true) {
+        cell6.owner = 'X'
+        c6.textContent = playerX.token
+      } else {
+        cell6.owner = 'O'
+        c6.textContent = playerO.token
+      }
       winCalc()
       if (winCalc() === true) {
-       
         winner1or2()
       } else {
         toggleTurnIndicator()
@@ -402,11 +448,15 @@ c7.addEventListener('click', () => {
     if (c7.textContent !== '') {
       alert('Please select an empty cell.')
     } else {
-      printXorO()
-      c7.textContent = squareClicked
+      if (playerX.turn === true) {
+        cell7.owner = 'X'
+        c7.textContent = playerX.token
+      } else {
+        cell7.owner = 'O'
+        c7.textContent = playerO.token
+      }
       winCalc()
       if (winCalc() === true) {
-       
         winner1or2()
       } else {
         toggleTurnIndicator()
@@ -420,11 +470,15 @@ c8.addEventListener('click', () => {
     if (c8.textContent !== '') {
       alert('Please select an empty cell.')
     } else {
-      printXorO()
-      c8.textContent = squareClicked
+      if (playerX.turn === true) {
+        cell8.owner = 'X'
+        c8.textContent = playerX.token
+      } else {
+        cell8.owner = 'O'
+        c8.textContent = playerO.token
+      }
       winCalc()
       if (winCalc() === true) {
-        
         winner1or2()
       } else {
         toggleTurnIndicator()

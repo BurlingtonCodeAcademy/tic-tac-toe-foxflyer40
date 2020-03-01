@@ -119,9 +119,12 @@ cellArray.forEach(cell => {
    
    // create random generated cell selector 
    // syntax = c2.click()
+
+   // use for not foreach loop above and (keep break) it will pick next available cell
    
    
-    cell.click()
+    cell.click();
+    break
   }
   // console.log(cell.owner)
 })

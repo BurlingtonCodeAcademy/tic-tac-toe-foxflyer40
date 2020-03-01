@@ -83,7 +83,7 @@ let stopTimer = () => {
   clearInterval(gameTime)
 }
 
-//enable board - could be a single variable, do not need individual on-of switches
+//enable board - could be a single variable, do not need individual on-off switches
 let enableBoard = () => {
   cell0.active = true
   cell1.active = true
@@ -96,7 +96,7 @@ let enableBoard = () => {
   cell8.active = true
 }
 
-//disable board - could be a single variable, do not need individual on-of switches
+//disable board - could be a single variable, do not need individual on-off switches
 let disableBoard = () => {
   cell0.active = false
   cell1.active = false
@@ -140,22 +140,7 @@ let disableBoard = () => {
   //         turnCounter += 1
 
 
-let reset = () => {  // Intialized game conditions
-  playerX.name = 'Player X'
-  playerX.turn = false
-  playerO.name = 'Player O'
-  playerO.turn = false
-  startUp.setAttribute('disabled', '')// start button not clickable
-  document.getElementById('gameType').style.display = 'block'//show game type choosers
-  document.getElementById('players').style.display = 'none'//hide enter 2 names
-  document.getElementById('player').style.display = 'none'// hide enter 1 name
-  document.getElementById('turnIndicator').style.display = 'none'// hide play display
-  document.getElementById('instructions').style.display = 'block'//show instruction line
-  document.getElementById('timer').style.display = 'none'// hide timer display
-  instructionMessage.textContent = 'Select your Game Type' //instructions at start up
-  disableBoard() // board is not clickable
-  elapsedTime = 0 //initialize timer
-}
+
 
 // switch player turns after evaluationg if winning condition exists
 // if last turn and no win condition initiate DRAW display
@@ -219,6 +204,25 @@ let winner1or2 = () => {
 }
 
 //  Game Play set up inputs********************************************************
+
+
+let reset = () => {  // Intialized game conditions
+  playerX.name = 'Player X'
+  playerX.turn = false
+  playerO.name = 'Player O'
+  playerO.turn = false
+  startUp.setAttribute('disabled', '')// start button not clickable
+  document.getElementById('gameType').style.display = 'block'//show game type choosers
+  document.getElementById('players').style.display = 'none'//hide enter 2 names
+  document.getElementById('player').style.display = 'none'// hide enter 1 name
+  document.getElementById('turnIndicator').style.display = 'none'// hide play display
+  document.getElementById('instructions').style.display = 'block'//show instruction line
+  document.getElementById('timer').style.display = 'none'// hide timer display
+  instructionMessage.textContent = 'Select your Game Type' //instructions at start up
+  disableBoard() // board is not clickable
+  elapsedTime = 0 //initialize timer
+}
+
 reset()
 
 playerVsComputer.addEventListener('click', function() {

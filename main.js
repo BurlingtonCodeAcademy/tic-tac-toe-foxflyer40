@@ -63,6 +63,7 @@ const cell7 = new BoardSquare(c7, '', true)
 const cell8 = new BoardSquare(c8, '', true)
 
 /****  functions **********************************************************************/
+
 // random number generator
 function randomCell(max, min) {
   return Math.floor(min + Math.random() * (max - min + 1))
@@ -109,41 +110,36 @@ let disableBoard = () => {
   cell8.active = false
 }
 
-    // Computer now decides it's move - UNSUCCESSFUL
-//let dl5500 = () => {   
-  // computer decides which squares are available to put something in
-       // iterate over my boardSquare objects, find objejts whose owner = ""
-       // build array from these
+// Computer now decides it's move - UNSUCCESSFUL
+let dl5500 = () => {
+  let cellArray = [c0, c1, c2, c3, c4, c5, c6, c7, c8]
+  let selectableCells =[]
+cellArray.forEach(cell => {
+  if(cell.textContent !== 'X' && cell.textContent !== 'O') {
+   
+   // create random generated cell selector 
+   // syntax = c2.click()
+   
+   
+    cell.click()
+  }
+  // console.log(cell.owner)
+})
+
+
   
-  // copmuter now generates a random number
-  // uses this number to pick the nth item in the array
-  //let cellPicker = randomCell('# of items in the array', 0)
-  //computer now places O token in the selected cell
-    
-  
-  // cellPicked = 'cell' + cellPicker
-  // cell0.owner = 'O'
-  // c0.textContent = playerO.token
 
-  // for (let cCell of Object.values(cellsSelectable)) {
-  // if (cCell[0] === "") {
-  //   return cCell[1]
+  // winCalc()
+  // if (winCalc() === true) {
+  //   winner1or2()
+  // } else {
+  //   turnCounter += 1
   // }
-  // }
-
-  //      these items below complete the 'turn' of the computer
-
-  //       winCalc()
-  //       if (winCalc() === true) {
-  //         winner1or2()
-  //       } else {
-  //         turnCounter += 1
-
-
-
-
+}
 // switch player turns after evaluationg if winning condition exists
 // if last turn and no win condition initiate DRAW display
+
+
 let toggleTurnIndicator = () => {
   winCalc()
   if (playerO.turn === true && playerO.name !== 'Dell Latitude 5500') {
@@ -155,8 +151,11 @@ let toggleTurnIndicator = () => {
     playerX.turn = false
     playerO.turn = true
   }
-  if (playerO.name === 'Dell Latitude 5500') {
-    console.log("Computer now decides it's move")
+  if (playerO.turn === true && playerO.name === 'Dell Latitude 5500') {
+    dl5500()
+    playerUp.textContent = playerX.name + ' - PLAY!'
+    playerO.turn = false
+    playerX.turn = true
   }
   turnCounter += 1
   if (turnCounter === 10) {
@@ -225,7 +224,7 @@ let reset = () => {  // Intialized game conditions
 
 reset()
 
-playerVsComputer.addEventListener('click', function() {
+playerVsComputer.addEventListener('click', function () {
   document.getElementById('gameType').style.display = 'none'
   document.getElementById('players').style.display = 'none'
   document.getElementById('player').style.display = 'block'
@@ -234,7 +233,7 @@ playerVsComputer.addEventListener('click', function() {
   instructionMessage.textContent = 'Enter your name:'
 })
 
-playerVsPlayer.addEventListener('click', function() {
+playerVsPlayer.addEventListener('click', function () {
   document.getElementById('gameType').style.display = 'none'
   document.getElementById('players').style.display = 'block'
   document.getElementById('player').style.display = 'none'
@@ -243,7 +242,7 @@ playerVsPlayer.addEventListener('click', function() {
   instructionMessage.textContent = 'Enter player names then click Save Names'
 })
 
-playerNamesIn.addEventListener('click', function() {
+playerNamesIn.addEventListener('click', function () {
   if (xPlayer.value === '') {
     playerX.name = 'Player X'
   } else {
@@ -263,7 +262,7 @@ playerNamesIn.addEventListener('click', function() {
   startUp.removeAttribute('disabled', '')
 })
 
-nameIn.addEventListener('click', function() {
+nameIn.addEventListener('click', function () {
   if (xPlayer.value === '') {
     playerX.name = 'Player X'
   } else {
@@ -282,7 +281,7 @@ nameIn.addEventListener('click', function() {
 //     Game play - game live and proceeds by responding to click inputs
 
 // start game - disable start button 
-startUp.addEventListener('click', function() {
+startUp.addEventListener('click', function () {
   startUp.setAttribute('disabled', '')
   enableBoard()
   document.getElementById('timer').style.display = 'block'
@@ -290,7 +289,7 @@ startUp.addEventListener('click', function() {
   gameTime()
   playerX.turn = true
   playerUp.textContent = playerX.name + ' - PLAY!'
- })
+})
 
 // add event listeners for board squares
 c0.addEventListener('click', () => {

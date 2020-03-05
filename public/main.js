@@ -64,10 +64,7 @@ const cell8 = new BoardSquare(c8, '', true)
 
 /****  functions **********************************************************************/
 
-// random number generator
-function randomCell(max, min) {
-  return Math.floor(min + Math.random() * (max - min + 1))
-}
+
 
 //startTimer =
 function myTimer() {
@@ -75,12 +72,12 @@ function myTimer() {
   document.getElementById('seconds').innerHTML = elapsedTime
 }
 
-let gameTime = () => {
+gameTime = () => {
   setInterval(myTimer, 1000)
 }
 
 // stop timer
-let stopTimer = () => {
+stopTimer = () => {
   clearInterval(gameTime)
 }
 
@@ -111,39 +108,43 @@ let disableBoard = () => {
 }
 
 // Computer now decides it's move - UNSUCCESSFUL
-let dl5500 = () => {
-  let cellArray = [c0, c1, c2, c3, c4, c5, c6, c7, c8]
-  let selectableCells =[]
-cellArray.forEach(cell => {
-  if(cell.textContent !== 'X' && cell.textContent !== 'O') {
-   
-   // create random generated cell selector 
-   // syntax = c2.click()
+dl5500 = () => {
+   // set up array and new array of selectable cells
+  const cellArray = [c0, c1, c2, c3, c4, c5, c6, c7, c8]
+  let selectableCells = []
 
-   // use for not foreach loop above and (keep break) it will pick next available cell
-   
-   
-    cell.click();
-    break
-  }
-  // console.log(cell.owner)
-})
+  console.log(selectableCells)
 
-
+  // for each in array, if not owned push to new array of selectable cells
+  cellArray.forEach(cell => {
+    if (cell.textContent !== 'X' && cell.textContent !== 'O') {
+      selectableCells.push(cell)
+    }
+  })
+  console.log(selectableCells)
+ 
+  // generate random number using length of new array
+  let count = selectableCells.length
+  console.log(count)
   
+  randomNum = function (max, min) {
+    return Math.floor(min + Math.random() * (max - min + 1))
+  }
+  let cellPicker = (randomNum(count, 1)-1)
 
-  // winCalc()
-  // if (winCalc() === true) {
-  //   winner1or2()
-  // } else {
-  //   turnCounter += 1
-  // }
+
+  console.log(selectableCells)
+  console.log(cellPicker)
+  console.log(selectableCells[cellPicker])
+  //click cell picked - this should fire event listener for the cell
+ selectableCells[cellPicker].click()
+
+
 }
-// switch player turns after evaluationg if winning condition exists
-// if last turn and no win condition initiate DRAW display
 
 
-let toggleTurnIndicator = () => {
+
+toggleTurnIndicator = () => {
   winCalc()
   if (playerO.turn === true && playerO.name !== 'Dell Latitude 5500') {
     playerUp.textContent = playerX.name + ' - PLAY!'
@@ -171,7 +172,7 @@ let toggleTurnIndicator = () => {
 }
 
 //Checks to see if there is a winner 
-let winCalc = () => {
+winCalc = () => {
   for (let winSet of Object.values(winConditions)) {
     //filter out data sets that include an empty value = a winning set is all values filled
     if (winSet[0].textContent !== '') {
@@ -193,7 +194,7 @@ let winCalc = () => {
 }
 
 // Win condition satisfied
-let winner1or2 = () => {
+winner1or2 = () => {
   disableBoard()
   if (playerX.turn === true) {
     playerUp.textContent = playerX.name + ' WON!'

@@ -17,8 +17,10 @@ let c5 = document.getElementById('cell-5')
 let c6 = document.getElementById('cell-6')
 let c7 = document.getElementById('cell-7')
 let c8 = document.getElementById('cell-8')
+const cellArray = [c0, c1, c2, c3, c4, c5, c6, c7, c8]
 let elapsedTime = document.getElementById('seconds')//Timer display number
 let turnCounter = 1 // keep track of # of turns
+let boardActive = false
 
 let winConditions = {   // create win condition arrays  
   topRow: [c0, c1, c2],
@@ -83,66 +85,33 @@ stopTimer = () => {
 
 //enable board - could be a single variable, do not need individual on-off switches
 let enableBoard = () => {
-  cell0.active = true
-  cell1.active = true
-  cell2.active = true
-  cell3.active = true
-  cell4.active = true
-  cell5.active = true
-  cell6.active = true
-  cell7.active = true
-  cell8.active = true
+  boardActive = true
 }
 
 //disable board - could be a single variable, do not need individual on-off switches
 let disableBoard = () => {
-  cell0.active = false
-  cell1.active = false
-  cell2.active = false
-  cell3.active = false
-  cell4.active = false
-  cell5.active = false
-  cell6.active = false
-  cell7.active = false
-  cell8.active = false
-}
+  boardActive = false
+ }
 
 // Computer now decides it's move - UNSUCCESSFUL
 dl5500 = () => {
   // set up array and new array of selectable cells
-  const cellArray = [c0, c1, c2, c3, c4, c5, c6, c7, c8]
-  let selectableCells = []
-
-  console.log(selectableCells)
-
+   let selectableCells = []
   // for each in array, if not owned push to new array of selectable cells
   cellArray.forEach(cell => {
     if (cell.textContent !== 'X' && cell.textContent !== 'O') {
       selectableCells.push(cell)
     }
   })
-  console.log(selectableCells)
-
   // generate random number using length of new array
   let count = selectableCells.length
-  console.log(count)
-
-  randomNum = function (max, min) {
+   randomNum = function (max, min) {
     return Math.floor(min + Math.random() * (max - min + 1))
   }
   let cellPicker = (randomNum(count, 1) - 1)
-
-
-  console.log(selectableCells)
-  console.log(cellPicker)
-  console.log(selectableCells[cellPicker])
   //click cell picked - this should fire event listener for the cell
   selectableCells[cellPicker].click()
-
-
 }
-
-
 
 toggleTurnIndicator = () => {
   //winCalc()
@@ -171,8 +140,6 @@ toggleTurnIndicator = () => {
       playerX.turn = true
     }
   }
-
-
 }
 
 //Checks to see if there is a winner 
@@ -300,8 +267,52 @@ startUp.addEventListener('click', function () {
 })
 
 // add event listeners for board squares
+
+// cellArray.forEach(cell => {
+//   // add an event listener to each cell element
+//   cell.location.addEventListener( 'click', cellListenerFunction )
+// })
+
+// function cellListenerFunction() {
+//   // write your repeated code here
+//   if (boardActive === true) {
+//     if (c0.textContent !== '') {
+//       alert('Please select an empty cell.')
+//     } else {
+//       if (playerX.turn === true) {
+//         cell0.owner = 'X'
+//         c0.textContent = playerX.token
+//       } else {
+//         cell0.owner = 'O'
+//         c0.textContent = playerO.token
+//       }
+//       winCalc()
+//       if (winCalc() === true) {
+//         winner1or2()
+//       } else {
+//         toggleTurnIndicator()
+//       }
+//     }
+//   }
+ 
+ 
+ 
+ 
+//   if (event.target.textContent !== "") {
+//     // alert
+//   } else {
+//     if (playerX.turn === true) {
+//       event.target.textContent = playerX.token
+//     } 
+//     // else etc etc
+//   }
+// }
+
+
+
+
 c0.addEventListener('click', () => {
-  if (cell0.active === true) {
+  if (boardActive === true) {
     if (c0.textContent !== '') {
       alert('Please select an empty cell.')
     } else {
@@ -323,7 +334,7 @@ c0.addEventListener('click', () => {
 })
 
 c1.addEventListener('click', () => {
-  if (cell1.active === true) {
+  if (boardActive === true) {
     if (c1.textContent !== '') {
       alert('Please select an empty cell.')
     } else {
@@ -345,7 +356,7 @@ c1.addEventListener('click', () => {
 })
 
 c2.addEventListener('click', () => {
-  if (cell2.active === true) {
+  if (boardActive === true) {
     if (c2.textContent !== '') {
       alert('Please select an empty cell.')
     } else {
@@ -367,7 +378,7 @@ c2.addEventListener('click', () => {
 })
 
 c3.addEventListener('click', () => {
-  if (cell3.active === true) {
+  if (boardActive === true) {
     if (c3.textContent !== '') {
       alert('Please select an empty cell.')
     } else {
@@ -389,7 +400,7 @@ c3.addEventListener('click', () => {
 })
 
 c4.addEventListener('click', () => {
-  if (cell4.active === true) {
+  if (boardActive === true) {
     if (c4.textContent !== '') {
       alert('Please select an empty cell.')
     } else {
@@ -411,7 +422,7 @@ c4.addEventListener('click', () => {
 })
 
 c5.addEventListener('click', () => {
-  if (cell5.active === true) {
+  if (boardActive === true) {
     if (c5.textContent !== '') {
       alert('Please select an empty cell.')
     } else {
@@ -433,7 +444,7 @@ c5.addEventListener('click', () => {
 })
 
 c6.addEventListener('click', () => {
-  if (cell6.active === true) {
+  if (boardActive === true) {
     if (c6.textContent !== '') {
       alert('Please select an empty cell.')
     } else {
@@ -455,7 +466,7 @@ c6.addEventListener('click', () => {
 })
 
 c7.addEventListener('click', () => {
-  if (cell7.active === true) {
+  if (boardActive === true) {
     if (c7.textContent !== '') {
       alert('Please select an empty cell.')
     } else {
@@ -477,7 +488,7 @@ c7.addEventListener('click', () => {
 })
 
 c8.addEventListener('click', () => {
-  if (cell8.active === true) {
+  if (boardActive === true) {
     if (c8.textContent !== '') {
       alert('Please select an empty cell.')
     } else {

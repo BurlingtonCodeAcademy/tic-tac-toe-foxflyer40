@@ -109,7 +109,7 @@ let disableBoard = () => {
 
 // Computer now decides it's move - UNSUCCESSFUL
 dl5500 = () => {
-   // set up array and new array of selectable cells
+  // set up array and new array of selectable cells
   const cellArray = [c0, c1, c2, c3, c4, c5, c6, c7, c8]
   let selectableCells = []
 
@@ -122,22 +122,22 @@ dl5500 = () => {
     }
   })
   console.log(selectableCells)
- 
+
   // generate random number using length of new array
   let count = selectableCells.length
   console.log(count)
-  
+
   randomNum = function (max, min) {
     return Math.floor(min + Math.random() * (max - min + 1))
   }
-  let cellPicker = (randomNum(count, 1)-1)
+  let cellPicker = (randomNum(count, 1) - 1)
 
 
   console.log(selectableCells)
   console.log(cellPicker)
   console.log(selectableCells[cellPicker])
   //click cell picked - this should fire event listener for the cell
- selectableCells[cellPicker].click()
+  selectableCells[cellPicker].click()
 
 
 }
@@ -145,22 +145,31 @@ dl5500 = () => {
 
 
 toggleTurnIndicator = () => {
-  winCalc()
+  //winCalc()
+
+
   if (playerO.turn === true && playerO.name !== 'Dell Latitude 5500') {
     playerUp.textContent = playerX.name + ' - PLAY!'
     playerO.turn = false
     playerX.turn = true
   } else if (playerX.turn === true) {
+
     playerUp.textContent = playerO.name + ' - PLAY!'
     playerX.turn = false
     playerO.turn = true
+    if (/*playerO.turn === true &&*/ playerO.name === 'Dell Latitude 5500') {
+      dl5500()
+      playerUp.textContent = playerX.name + ' - PLAY!'
+      playerO.turn = false
+      playerX.turn = true
+    }
   }
-  if (playerO.turn === true && playerO.name === 'Dell Latitude 5500') {
-    dl5500()
-    playerUp.textContent = playerX.name + ' - PLAY!'
-    playerO.turn = false
-    playerX.turn = true
-  }
+  // if (playerO.turn === true && playerO.name === 'Dell Latitude 5500') {
+  //   dl5500()
+  //   playerUp.textContent = playerX.name + ' - PLAY!'
+  //   playerO.turn = false
+  //   playerX.turn = true
+  // }
   turnCounter += 1
   if (turnCounter === 10) {
     disableBoard()

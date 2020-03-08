@@ -146,9 +146,15 @@ dl5500 = () => {
 
 toggleTurnIndicator = () => {
   //winCalc()
-
-
-  if (playerO.turn === true && playerO.name !== 'Dell Latitude 5500') {
+  turnCounter += 1
+  if (turnCounter === 10) {
+    console.log(turnCounter + "turn")
+    disableBoard()
+    playerUp.textContent = 'This game is a DRAW!'
+    instructionMessage.textContent =
+      'This game lasted ' + elapsedTime + ' seconds. Refresh page for new game.'
+    document.getElementById('timer').style.display = 'none'
+  } else if (playerO.turn === true && playerO.name !== 'Dell Latitude 5500') {
     playerUp.textContent = playerX.name + ' - PLAY!'
     playerO.turn = false
     playerX.turn = true
@@ -157,27 +163,16 @@ toggleTurnIndicator = () => {
     playerUp.textContent = playerO.name + ' - PLAY!'
     playerX.turn = false
     playerO.turn = true
-    if (/*playerO.turn === true &&*/ playerO.name === 'Dell Latitude 5500') {
+    if (playerO.name === 'Dell Latitude 5500') {
       dl5500()
       playerUp.textContent = playerX.name + ' - PLAY!'
+      console.log("in the turn counter")
       playerO.turn = false
       playerX.turn = true
     }
   }
-  // if (playerO.turn === true && playerO.name === 'Dell Latitude 5500') {
-  //   dl5500()
-  //   playerUp.textContent = playerX.name + ' - PLAY!'
-  //   playerO.turn = false
-  //   playerX.turn = true
-  // }
-  turnCounter += 1
-  if (turnCounter === 10) {
-    disableBoard()
-    playerUp.textContent = 'This game is a DRAW!'
-    instructionMessage.textContent =
-      'This game lasted ' + elapsedTime + ' seconds. Refresh page for new game.'
-    document.getElementById('timer').style.display = 'none'
-  }
+
+
 }
 
 //Checks to see if there is a winner 

@@ -42,27 +42,12 @@ class Player {  // create player class objects
   }
 }
 
-class BoardSquare {  // create boardsquare class objects
-  constructor(owner, active) {
-    this.location = location  // global variable that maps to board element
-    this.owner = owner  // whose token is in the square  = to board Element .textContent
-    this.active = active  // clickable or not
-  }
-}
+
 
 /****   Objects   *************************************************************** */
 const playerX = new Player('Player X', false, false, 'X')
 const playerO = new Player('Player O', false, false, 'O')
 
-const cell0 = new BoardSquare(c0, '', true)
-const cell1 = new BoardSquare(c1, '', true)
-const cell2 = new BoardSquare(c2, '', true)
-const cell3 = new BoardSquare(c3, '', true)
-const cell4 = new BoardSquare(c4, '', true)
-const cell5 = new BoardSquare(c5, '', true)
-const cell6 = new BoardSquare(c6, '', true)
-const cell7 = new BoardSquare(c7, '', true)
-const cell8 = new BoardSquare(c8, '', true)
 
 /****  functions **********************************************************************/
 
@@ -317,11 +302,9 @@ c0.addEventListener('click', () => {
       alert('Please select an empty cell.')
     } else {
       if (playerX.turn === true) {
-        cell0.owner = 'X'
-        c0.textContent = playerX.token
+             c0.textContent = playerX.token
       } else {
-        cell0.owner = 'O'
-        c0.textContent = playerO.token
+               c0.textContent = playerO.token
       }
       winCalc()
       if (winCalc() === true) {
@@ -339,11 +322,9 @@ c1.addEventListener('click', () => {
       alert('Please select an empty cell.')
     } else {
       if (playerX.turn === true) {
-        cell1.owner = 'X'
-        c1.textContent = playerX.token
+              c1.textContent = playerX.token
       } else {
-        cell1.owner = 'O'
-        c1.textContent = playerO.token
+             c1.textContent = playerO.token
       }
       winCalc()
       if (winCalc() === true) {
@@ -361,11 +342,9 @@ c2.addEventListener('click', () => {
       alert('Please select an empty cell.')
     } else {
       if (playerX.turn === true) {
-        cell2.owner = 'X'
-        c2.textContent = playerX.token
+             c2.textContent = playerX.token
       } else {
-        cell2.owner = 'O'
-        c2.textContent = playerO.token
+             c2.textContent = playerO.token
       }
       winCalc()
       if (winCalc() === true) {
@@ -383,11 +362,9 @@ c3.addEventListener('click', () => {
       alert('Please select an empty cell.')
     } else {
       if (playerX.turn === true) {
-        cell3.owner = 'X'
-        c3.textContent = playerX.token
+           c3.textContent = playerX.token
       } else {
-        cell3.owner = 'O'
-        c3.textContent = playerO.token
+              c3.textContent = playerO.token
       }
       winCalc()
       if (winCalc() === true) {
@@ -405,10 +382,10 @@ c4.addEventListener('click', () => {
       alert('Please select an empty cell.')
     } else {
       if (playerX.turn === true) {
-        cell4.owner = 'X'
+       // cell4.owner = 'X'
         c4.textContent = playerX.token
       } else {
-        cell4.owner = 'O'
+        //cell4.owner = 'O'
         c4.textContent = playerO.token
       }
       winCalc()
@@ -427,10 +404,10 @@ c5.addEventListener('click', () => {
       alert('Please select an empty cell.')
     } else {
       if (playerX.turn === true) {
-        cell5.owner = 'X'
+      //  cell5.owner = 'X'
         c5.textContent = playerX.token
       } else {
-        cell5.owner = 'O'
+       // cell5.owner = 'O'
         c5.textContent = playerO.token
       }
       winCalc()
@@ -449,10 +426,10 @@ c6.addEventListener('click', () => {
       alert('Please select an empty cell.')
     } else {
       if (playerX.turn === true) {
-        cell6.owner = 'X'
+       // cell6.owner = 'X'
         c6.textContent = playerX.token
       } else {
-        cell6.owner = 'O'
+       // cell6.owner = 'O'
         c6.textContent = playerO.token
       }
       winCalc()
@@ -471,10 +448,10 @@ c7.addEventListener('click', () => {
       alert('Please select an empty cell.')
     } else {
       if (playerX.turn === true) {
-        cell7.owner = 'X'
+       // cell7.owner = 'X'
         c7.textContent = playerX.token
       } else {
-        cell7.owner = 'O'
+       // cell7.owner = 'O'
         c7.textContent = playerO.token
       }
       winCalc()
@@ -493,10 +470,10 @@ c8.addEventListener('click', () => {
       alert('Please select an empty cell.')
     } else {
       if (playerX.turn === true) {
-        cell8.owner = 'X'
+       // cell8.owner = 'X'
         c8.textContent = playerX.token
       } else {
-        cell8.owner = 'O'
+        //cell8.owner = 'O'
         c8.textContent = playerO.token
       }
       winCalc()

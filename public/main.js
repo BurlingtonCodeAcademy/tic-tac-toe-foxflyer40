@@ -8,10 +8,11 @@ let playerVsPlayer = document.getElementById('pvp')// game type chooser button
 let playerVsComputer = document.getElementById('pvc')// game type chooser button
 let xPlayer = document.getElementById('playerx')// player x name input
 let oPlayer = document.getElementById('playero')// player o name input
+let sPlayer = document.getElementById('player1')// single player input
 let c0 = document.getElementById('cell-0')
 let c1 = document.getElementById('cell-1')
 let c2 = document.getElementById('cell-2')
-let c3 = document.getElementById('cell-3')
+let c3 = document.getElementById('cell-3')  // cell elements and array
 let c4 = document.getElementById('cell-4')
 let c5 = document.getElementById('cell-5')
 let c6 = document.getElementById('cell-6')
@@ -37,51 +38,43 @@ class Player {  // create player class objects
   constructor(name, turn, won, token) {
     this.name = name  //what is your name
     this.turn = turn  //is it your turn t/f
-    this.won = won  // did you win -- NOT USED
     this.token = token  // what do you mark your square with
   }
 }
 
-
-
-/****   Objects   *************************************************************** */
-const playerX = new Player('Player X', false, false, 'X')
-const playerO = new Player('Player O', false, false, 'O')
+/****   Player Object  *************************************************************** */
+const playerX = new Player('', false, false, 'X')
+const playerO = new Player('', false, false, 'O')
 
 
 /****  functions **********************************************************************/
-
-
 
 //startTimer =
 function myTimer() {
   elapsedTime += 1
   document.getElementById('seconds').innerHTML = elapsedTime
 }
-
 gameTime = () => {
   setInterval(myTimer, 1000)
 }
-
 // stop timer
 stopTimer = () => {
   clearInterval(gameTime)
 }
 
-//enable board - could be a single variable, do not need individual on-off switches
+//enable board 
 let enableBoard = () => {
   boardActive = true
 }
-
-//disable board - could be a single variable, do not need individual on-off switches
+//disable board 
 let disableBoard = () => {
   boardActive = false
- }
+}
 
-// Computer now decides it's move - UNSUCCESSFUL
+// Computer now decides it's move 
 dl5500 = () => {
   // set up array and new array of selectable cells
-   let selectableCells = []
+  let selectableCells = []
   // for each in array, if not owned push to new array of selectable cells
   cellArray.forEach(cell => {
     if (cell.textContent !== 'X' && cell.textContent !== 'O') {
@@ -90,16 +83,15 @@ dl5500 = () => {
   })
   // generate random number using length of new array
   let count = selectableCells.length
-   randomNum = function (max, min) {
+  randomNum = function (max, min) {
     return Math.floor(min + Math.random() * (max - min + 1))
   }
   let cellPicker = (randomNum(count, 1) - 1)
   //click cell picked - this should fire event listener for the cell
   selectableCells[cellPicker].click()
 }
-
+// switch players
 toggleTurnIndicator = () => {
-  //winCalc()
   turnCounter += 1
   if (turnCounter === 10) {
     console.log(turnCounter + "turn")
@@ -113,7 +105,6 @@ toggleTurnIndicator = () => {
     playerO.turn = false
     playerX.turn = true
   } else if (playerX.turn === true) {
-
     playerUp.textContent = playerO.name + ' - PLAY!'
     playerX.turn = false
     playerO.turn = true
@@ -163,12 +154,11 @@ winner1or2 = () => {
 }
 
 //  Game Play set up inputs********************************************************
-
-
-let reset = () => {  // Intialized game conditions
-  playerX.name = 'Player X'
+// Intialize game conditions
+let reset = () => {
+  playerX.name = ''
   playerX.turn = false
-  playerO.name = 'Player O'
+  playerO.name = ''
   playerO.turn = false
   startUp.setAttribute('disabled', '')// start button not clickable
   document.getElementById('gameType').style.display = 'block'//show game type choosers
@@ -186,9 +176,7 @@ reset()
 
 playerVsComputer.addEventListener('click', function () {
   document.getElementById('gameType').style.display = 'none'
-  document.getElementById('players').style.display = 'none'
   document.getElementById('player').style.display = 'block'
-  document.getElementById('turnIndicator').style.display = 'none'
   document.getElementById('instructions').style.display = 'block'
   instructionMessage.textContent = 'Enter your name:'
 })
@@ -196,12 +184,11 @@ playerVsComputer.addEventListener('click', function () {
 playerVsPlayer.addEventListener('click', function () {
   document.getElementById('gameType').style.display = 'none'
   document.getElementById('players').style.display = 'block'
-  document.getElementById('player').style.display = 'none'
-  document.getElementById('turnIndicator').style.display = 'none'
   document.getElementById('instructions').style.display = 'block'
   instructionMessage.textContent = 'Enter player names then click Save Names'
 })
 
+// set up player names from input - use generic if no input
 playerNamesIn.addEventListener('click', function () {
   if (xPlayer.value === '') {
     playerX.name = 'Player X'
@@ -213,24 +200,20 @@ playerNamesIn.addEventListener('click', function () {
   } else {
     playerO.name = oPlayer.value
   }
-  document.getElementById('gameType').style.display = 'none'
   document.getElementById('players').style.display = 'none'
-  document.getElementById('player').style.display = 'none'
   document.getElementById('turnIndicator').style.display = 'block'
   document.getElementById('instructions').style.display = 'block'
   instructionMessage.textContent = 'Click start button to begin'
   startUp.removeAttribute('disabled', '')
 })
-
+// setup player x name and computer name for single player game
 nameIn.addEventListener('click', function () {
-  if (xPlayer.value === '') {
-    playerX.name = 'Player X'
+  if (sPlayer.value !== '') {
+    playerX.name = sPlayer.value
   } else {
-    playerX.name = xPlayer.value
+    playerX.name = 'Player X'
   }
   playerO.name = 'Dell Latitude 5500'
-  document.getElementById('gameType').style.display = 'none'
-  document.getElementById('players').style.display = 'none'
   document.getElementById('player').style.display = 'none'
   document.getElementById('turnIndicator').style.display = 'block'
   document.getElementById('instructions').style.display = 'block'
@@ -238,7 +221,7 @@ nameIn.addEventListener('click', function () {
   startUp.removeAttribute('disabled', '')
 })
 
-//     Game play - game live and proceeds by responding to click inputs
+//Game play - game is live and proceeds by responding to click inputs
 
 // start game - disable start button 
 startUp.addEventListener('click', function () {
@@ -251,237 +234,25 @@ startUp.addEventListener('click', function () {
   playerUp.textContent = playerX.name + ' - PLAY!'
 })
 
-// add event listeners for board squares
-
-// cellArray.forEach(cell => {
-//   // add an event listener to each cell element
-//   cell.location.addEventListener( 'click', cellListenerFunction )
-// })
-
-// function cellListenerFunction() {
-//   // write your repeated code here
-//   if (boardActive === true) {
-//     if (c0.textContent !== '') {
-//       alert('Please select an empty cell.')
-//     } else {
-//       if (playerX.turn === true) {
-//         cell0.owner = 'X'
-//         c0.textContent = playerX.token
-//       } else {
-//         cell0.owner = 'O'
-//         c0.textContent = playerO.token
-//       }
-//       winCalc()
-//       if (winCalc() === true) {
-//         winner1or2()
-//       } else {
-//         toggleTurnIndicator()
-//       }
-//     }
-//   }
- 
- 
- 
- 
-//   if (event.target.textContent !== "") {
-//     // alert
-//   } else {
-//     if (playerX.turn === true) {
-//       event.target.textContent = playerX.token
-//     } 
-//     // else etc etc
-//   }
-// }
-
-
-
-
-c0.addEventListener('click', () => {
-  if (boardActive === true) {
-    if (c0.textContent !== '') {
-      alert('Please select an empty cell.')
-    } else {
-      if (playerX.turn === true) {
-             c0.textContent = playerX.token
+// add event listener to each cell element
+cellArray.forEach(cell => {
+  cell.addEventListener('click', () => {
+    if (boardActive === true) {
+      if (cell.textContent !== '') {
+        alert('Please select an empty cell.')
       } else {
-               c0.textContent = playerO.token
-      }
-      winCalc()
-      if (winCalc() === true) {
-        winner1or2()
-      } else {
-        toggleTurnIndicator()
+        if (playerX.turn === true) {
+          cell.textContent = playerX.token
+        } else {
+          cell.textContent = playerO.token
+        }
+        winCalc()
+        if (winCalc() === true) {
+          winner1or2()
+        } else {
+          toggleTurnIndicator()
+        }
       }
     }
-  }
-})
-
-c1.addEventListener('click', () => {
-  if (boardActive === true) {
-    if (c1.textContent !== '') {
-      alert('Please select an empty cell.')
-    } else {
-      if (playerX.turn === true) {
-              c1.textContent = playerX.token
-      } else {
-             c1.textContent = playerO.token
-      }
-      winCalc()
-      if (winCalc() === true) {
-        winner1or2()
-      } else {
-        toggleTurnIndicator()
-      }
-    }
-  }
-})
-
-c2.addEventListener('click', () => {
-  if (boardActive === true) {
-    if (c2.textContent !== '') {
-      alert('Please select an empty cell.')
-    } else {
-      if (playerX.turn === true) {
-             c2.textContent = playerX.token
-      } else {
-             c2.textContent = playerO.token
-      }
-      winCalc()
-      if (winCalc() === true) {
-        winner1or2()
-      } else {
-        toggleTurnIndicator()
-      }
-    }
-  }
-})
-
-c3.addEventListener('click', () => {
-  if (boardActive === true) {
-    if (c3.textContent !== '') {
-      alert('Please select an empty cell.')
-    } else {
-      if (playerX.turn === true) {
-           c3.textContent = playerX.token
-      } else {
-              c3.textContent = playerO.token
-      }
-      winCalc()
-      if (winCalc() === true) {
-        winner1or2()
-      } else {
-        toggleTurnIndicator()
-      }
-    }
-  }
-})
-
-c4.addEventListener('click', () => {
-  if (boardActive === true) {
-    if (c4.textContent !== '') {
-      alert('Please select an empty cell.')
-    } else {
-      if (playerX.turn === true) {
-       // cell4.owner = 'X'
-        c4.textContent = playerX.token
-      } else {
-        //cell4.owner = 'O'
-        c4.textContent = playerO.token
-      }
-      winCalc()
-      if (winCalc() === true) {
-        winner1or2()
-      } else {
-        toggleTurnIndicator()
-      }
-    }
-  }
-})
-
-c5.addEventListener('click', () => {
-  if (boardActive === true) {
-    if (c5.textContent !== '') {
-      alert('Please select an empty cell.')
-    } else {
-      if (playerX.turn === true) {
-      //  cell5.owner = 'X'
-        c5.textContent = playerX.token
-      } else {
-       // cell5.owner = 'O'
-        c5.textContent = playerO.token
-      }
-      winCalc()
-      if (winCalc() === true) {
-        winner1or2()
-      } else {
-        toggleTurnIndicator()
-      }
-    }
-  }
-})
-
-c6.addEventListener('click', () => {
-  if (boardActive === true) {
-    if (c6.textContent !== '') {
-      alert('Please select an empty cell.')
-    } else {
-      if (playerX.turn === true) {
-       // cell6.owner = 'X'
-        c6.textContent = playerX.token
-      } else {
-       // cell6.owner = 'O'
-        c6.textContent = playerO.token
-      }
-      winCalc()
-      if (winCalc() === true) {
-        winner1or2()
-      } else {
-        toggleTurnIndicator()
-      }
-    }
-  }
-})
-
-c7.addEventListener('click', () => {
-  if (boardActive === true) {
-    if (c7.textContent !== '') {
-      alert('Please select an empty cell.')
-    } else {
-      if (playerX.turn === true) {
-       // cell7.owner = 'X'
-        c7.textContent = playerX.token
-      } else {
-       // cell7.owner = 'O'
-        c7.textContent = playerO.token
-      }
-      winCalc()
-      if (winCalc() === true) {
-        winner1or2()
-      } else {
-        toggleTurnIndicator()
-      }
-    }
-  }
-})
-
-c8.addEventListener('click', () => {
-  if (boardActive === true) {
-    if (c8.textContent !== '') {
-      alert('Please select an empty cell.')
-    } else {
-      if (playerX.turn === true) {
-       // cell8.owner = 'X'
-        c8.textContent = playerX.token
-      } else {
-        //cell8.owner = 'O'
-        c8.textContent = playerO.token
-      }
-      winCalc()
-      if (winCalc() === true) {
-        winner1or2()
-      } else {
-        toggleTurnIndicator()
-      }
-    }
-  }
+  })
 })

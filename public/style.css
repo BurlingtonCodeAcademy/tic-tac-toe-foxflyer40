@@ -14,7 +14,7 @@ h2 {
 }
 
 span{
-  font-size: 75px;
+  font-size: 20px;
   margin-top: 20px;
 }
 
@@ -47,6 +47,8 @@ div[id^="row-"] {
   width: 608px;
   box-sizing: border-box;
   overflow: hidden;
+  font-size: 120px;
+  font-family: "Comic Sans MS"
 }
 
 div.board {
